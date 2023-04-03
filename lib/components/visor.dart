@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calculadora/components/formula.dart';
+import 'package:calculadora/components/extras.dart';
 import 'package:calculadora/components/teclado.dart';
 import 'package:calculadora/model/expressao.dart';
 
@@ -11,22 +12,46 @@ class Visor extends StatefulWidget {
 }
 
 class _VisorState extends State<Visor> {
-  String texto = '';
+  String texto = '0';
 
   editar(String entrada) {
     setState(() {
       switch (entrada) {
         case 'AC':
-          texto = '';
+          texto = '0';
           break;
         case '←':
-          if (texto.isNotEmpty) texto = texto.substring(0, texto.length - 1);
+          if ((texto.length > 1) & (texto != '0')) {
+            texto = texto.substring(0, texto.length - 1);
+          } else {
+            texto = '0';
+          }
           break;
         case '=':
-          texto = Expressao(dado: texto).toString();
+          try {
+            texto = Expressao(dado: texto).toString();
+          } catch (e) {
+            texto = 'Erro!';
+          }
+          break;
+        case '+/-':
+          texto += '×(-1)×';
+          break;
+        case 'a²':
+          texto += '^2';
+          break;
+        case 'aᵇ':
+          texto += '^';
+          break;
+        case '√':
+          texto += '^(1/2)';
           break;
         default:
-          texto += entrada;
+          if (texto == '0') {
+            texto = entrada;
+          } else {
+            texto += entrada;
+          }
           break;
       }
     });
@@ -39,6 +64,7 @@ class _VisorState extends State<Visor> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(child: Formula(texto: texto)),
+          Extras(pressionar: editar),
           Teclado(texto: texto, pressionar: editar)
         ]);
   }

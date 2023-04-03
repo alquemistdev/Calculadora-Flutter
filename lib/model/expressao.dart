@@ -99,6 +99,12 @@ class Expressao {
       formula.removeAt(index);
       formula[index - 1] = result.toString();
     },
+    '%': (int index, List formula) {
+      double result = 0;
+      result = double.parse(formula[index - 1]) / 100;
+      formula.removeAt(index);
+      formula[index - 1] = result.toString();
+    },
     '×': (int index, List formula) {
       double result = 0;
       result =

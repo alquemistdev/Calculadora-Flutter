@@ -9,15 +9,13 @@ class Formula extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(0, 10, 30, 10),
-        color: const Color.fromARGB(255, 224, 224, 224),
-        child: Text(
-          texto,
-          textAlign: TextAlign.end,
-          style: const TextStyle(fontSize: 30, color: Colors.black54),
-        ),
+      padding: const EdgeInsets.fromLTRB(0, 10, 30, 20),
+      color: const Color.fromARGB(255, 224, 224, 224),
+      alignment: Alignment.bottomRight,
+      child: Text(
+        texto,
+        textAlign: TextAlign.end,
+        style: const TextStyle(fontSize: 40, color: Colors.black54),
       ),
     );
   }
