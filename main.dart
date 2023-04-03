@@ -5,9 +5,32 @@ class Expressao {
   String dado;
   List ordem = [];
   var resultado;
+
+  static double rad = 180 / 3.14;
   static Map<String, Function> regras_operadores = {
+    'sin': (int index, List formula) {
+      double result = 0;
+      result =
+          arrendondar(sin(grausToRadiano(double.parse(formula[index + 1]))), 2);
+      formula.removeAt(index + 1);
+      formula[index] = result.toString();
+    },
+    'cos': (int index, List formula) {
+      double result = 0;
+      result =
+          arrendondar(cos(grausToRadiano(double.parse(formula[index + 1]))), 2);
+      formula.removeAt(index + 1);
+      formula[index] = result.toString();
+    },
+    'tan': (int index, List formula) {
+      double result = 0;
+      result =
+          arrendondar(tan(grausToRadiano(double.parse(formula[index + 1]))), 2);
+      formula.removeAt(index + 1);
+      formula[index] = result.toString();
+    },
     '^': (int index, List formula) {
-      num result = 0;
+      num result = 0.0;
       result = pow(
           double.parse(formula[index - 1]), double.parse(formula[index + 1]));
       formula.removeAt(index + 1);
@@ -73,12 +96,17 @@ class Expressao {
       'fim': '}',
     },
   ];
+
+  Expressao({required this.dado}) {
+    this.ordem = stringToList(valor: this.dado);
+  }
+
   static List stringToList({required String valor}) {
     List resultado = [];
     bool unirNum = false;
     bool unirLetras = false;
     Set num = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
-    Set letras = {'s', 'e', 'n', 'c', 'o', 't', 'a'};
+    Set letras = {'s', 'i', 'n', 'c', 'o', 't', 'a'};
     for (int i = 0; i < valor.length; i++) {
       if (valor[i] == ' ') {
       } else if (num.contains(valor[i])) {
@@ -106,9 +134,26 @@ class Expressao {
     return resultado;
   }
 
-  Expressao({required this.dado}) {
-    this.ordem = stringToList(valor: this.dado);
-    print(this.ordem);
+  static double radianoToGraus(double valor) {
+    return valor * rad;
+  }
+
+  static double grausToRadiano(double valor) {
+    return valor / rad;
+  }
+
+  static double arrendondar(double valor, int casas) {
+    num fator = pow(10, casas);
+    double result = (valor * fator).toInt().toDouble();
+    String pont = result.toInt().toString();
+    int ultimo = int.parse(pont[pont.length - 1]);
+    int diferenca = 10 - ultimo;
+    if (diferenca <= 5) {
+      result = (diferenca + result) / fator;
+    } else {
+      result = (result - ultimo) / fator;
+    }
+    return result;
   }
 
   calcularFormula({required List formula}) {
@@ -133,6 +178,7 @@ class Expressao {
     List parte = [];
     bool agrupar = false;
     List aux = exp;
+    String out = '';
     for (var o in regras_ordem) {
       aux = total;
       total = [];
@@ -153,23 +199,31 @@ class Expressao {
       }
       print('= ${aux.reduce((value, element) => value += element)}');
     }
-    print('= ${total.reduce((value, element) => value += element)}');
     return calcularFormula(formula: total);
   }
 
-  void calcular() {
+  @override
+  String toString() {
+    this.ordem = stringToList(valor: this.dado);
     this.resultado = segmentar(exp: ordem);
+    return this.resultado.toString();
   }
 }
 
 void main(List<String> args) {
-  List<String> exemplos = ["{(2+5)*[(3+4)+(2^2)]}*3", "[2^(0.5)]", "4 * (1/2)"];
+  /*
+    EXEMPLOS
+
+    {(2+5)*[(3+4)+(2^2)]}*3
+    [2^(0.5)]
+    4 * (1/2)
+    sin(30)
+  */
   String entrada = '';
   do {
     entrada = stdin.readLineSync().toString();
     if (entrada == '') break;
     Expressao expressao = Expressao(dado: entrada);
-    expressao.calcular();
-    print('= ${expressao.resultado}');
+    print('= ${expressao}');
   } while (true);
 }
