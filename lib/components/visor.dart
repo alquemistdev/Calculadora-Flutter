@@ -44,7 +44,7 @@ class _VisorState extends State<Visor> {
           texto += '^';
           break;
         case '√':
-          texto += '^(1/2)';
+          texto += '^(1÷2)';
           break;
         default:
           if (texto == '0') {
