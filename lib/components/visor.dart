@@ -38,13 +38,25 @@ class _VisorState extends State<Visor> {
           texto += '×(-1)×';
           break;
         case 'sin':
-          texto += 'sin(';
+          if (texto == '0') {
+            texto = 'sin(';
+          } else {
+            texto += 'sin(';
+          }
           break;
         case 'cos':
-          texto += 'cos(';
+          if (texto == '0') {
+            texto = 'cos(';
+          } else {
+            texto += 'cos(';
+          }
           break;
         case 'tan':
-          texto += 'tan(';
+          if (texto == '0') {
+            texto = 'tan(';
+          } else {
+            texto += 'tan(';
+          }
           break;
         case 'a²':
           texto += '^2';
