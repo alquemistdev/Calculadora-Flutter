@@ -99,7 +99,7 @@ class Expressao {
       formula.removeAt(index);
       formula[index - 1] = result.toString();
     },
-    '*': (int index, List formula) {
+    '×': (int index, List formula) {
       double result = 0;
       result =
           double.parse(formula[index - 1]) * double.parse(formula[index + 1]);
@@ -107,7 +107,7 @@ class Expressao {
       formula.removeAt(index);
       formula[index - 1] = result.toString();
     },
-    '/': (int index, List formula) {
+    '÷': (int index, List formula) {
       double result = 0;
       result =
           double.parse(formula[index - 1]) / double.parse(formula[index + 1]);
@@ -245,7 +245,6 @@ class Expressao {
           }
         }
       }
-      print('= ${aux.reduce((value, element) => value += element)}');
     }
     return calcularFormula(formula: total);
   }
