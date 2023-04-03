@@ -9,7 +9,7 @@ end result, like those cell phone calculators. The documentation for this projec
 would be in English.
 
 ### Functionalities:
-1. Calculation with basic operators: + - (add), - - (subtract), * - (multiply), / - (divide);
+1. Calculation with basic operators: + (add), - (subtract), * (multiply), / (divide);
 2. Calculates functions: sin(), cos(), tan();
 3. Processes data of type int and double: 1 and 0.99;
 4. The size of the expression has no determined limit;
@@ -34,7 +34,7 @@ ficara em inglês.
 
 ### Funcionalidades:
 
-1. Calculo com operadores básicos: + - (somar), - - (subtrair), * - (multiplicar), / - (dividir);
+1. Calculo com operadores básicos: + (somar), - (subtrair), * (multiplicar), / (dividir);
 2. Faz calculo de funções: sin(), cos(), tan();
 3. Processa dados de tipo int e double: 1 e 0.99;
 4. O tamanho da expressão não tem limite determinado;
