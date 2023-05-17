@@ -48,3 +48,9 @@ deixando o lugar vazio;
 4. Não possui um tratamento de entrada de valores incorretos do usuario;
 
 Por isso, vocês tem liberdade para evoluir e otimizar o codigo, corrigindo bugs e lógicas quebradas.
+    
+## Exemplos
+![print_01](https://github.com/alquemistdev/Calculadora-Flutter/blob/main/img/print_01.png)
+![print_02](https://github.com/alquemistdev/Calculadora-Flutter/blob/main/img/print_02.png)
+![print_03](https://github.com/alquemistdev/Calculadora-Flutter/blob/main/img/print_03.png)
+    
